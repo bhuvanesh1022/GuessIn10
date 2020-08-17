@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "198713999742",
+    "firebase_url": "https://guessin10-15082020.firebaseio.com",
+    "project_id": "guessin10-15082020",
+    "storage_bucket": "guessin10-15082020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198713999742:android:88ea6c5332b59d1661b32f",
+        "android_client_info": {
+          "package_name": "com.skillmatics.guessin10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198713999742-pfnqdqq46j2frqdscj3e86gh8o9kppes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skillmatics.guessin10",
+            "certificate_hash": "9670a3c5f6b23ddf96074442b13b92b8fd30c477"
+          }
+        },
+        {
+          "client_id": "198713999742-2a5h0jhrp46fsa3kgakbhpv937korj6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUW5PSojXzqI-EuUWXPu_l8o89jqPrjLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198713999742-2a5h0jhrp46fsa3kgakbhpv937korj6u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "198713999742-vf8m0hjl9npllj7qn79f2fu64ma907gi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.skillmatics.guessin10"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

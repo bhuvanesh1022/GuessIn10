@@ -10,6 +10,8 @@ public class ForgotPanel : Base_UIPanel
     public TextMeshProUGUI sentMsg;
     public Button sendLink;
 
+    private string emailId;
+
     public override void OpenBehavior()
     {
         base.OpenBehavior();
@@ -23,13 +25,21 @@ public class ForgotPanel : Base_UIPanel
 
     void EmailValue(string eml)
     {
-        //AuthController.authController.emailId = eml;
-        //PlayerPrefs.SetString("EMAIL", AuthController.authController.emailId);
+        emailId = eml;
     }
 
     void OnSendLink()
     {
-        Base_UIPanel nextPanel = UIManager.instance.resetPasswordPanel;
+        StartCoroutine("OnLinkSent", emailId);
+    }
+
+    IEnumerator OnLinkSent(string email)
+    {
+        AuthController.authController.SendPasswordResetMail(email);
+        sentMsg.enabled = true;
+        sendLink.gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        Base_UIPanel nextPanel = UIManager.instance.loginPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
 }

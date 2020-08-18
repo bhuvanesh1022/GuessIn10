@@ -114,13 +114,11 @@ public class RegistrationPanel : Base_UIPanel
 
     void OnFacebookBtn()
     {
-        Base_UIPanel nextPanel = UIManager.instance.registerPanel;
-        UIManager.instance.TriggerPanelTransition(nextPanel);
+        AuthController.authController.SignInFacebook();
     }
 
     void OnGoogleBtn()
     {
-        Base_UIPanel nextPanel = UIManager.instance.registerPanel;
-        UIManager.instance.TriggerPanelTransition(nextPanel);
+        AuthController.authController.GoogleSignInDelegate();
     }
 }

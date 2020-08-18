@@ -86,10 +86,6 @@ public class LoginPanel : Base_UIPanel
     void OnLoginPressed()
     {
         AuthController.authController.LoginWithEmail(emailId, password);
-
-        Base_UIPanel nextPanel = UIManager.instance.registerPanel;
-        UIManager.instance.TriggerPanelTransition(nextPanel);
-        //Debug.Log(PlayerPrefs.GetString("EMAIL") +"\n"+ PlayerPrefs.GetString("PASSWORD"));
     }
 
     void OnRegisterPressed()

@@ -78,7 +78,7 @@ public class AuthController : MonoBehaviour
 
     IEnumerator UpdateUI()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         while (m_user == null)
         {
             Debug.Log("wait");
@@ -390,6 +390,7 @@ public class AuthController : MonoBehaviour
     public void LogoutUser()
     {
         m_auth.SignOut();
+        LoadHome(0);
         Debug.Log("succesfully logged out");
     }
 

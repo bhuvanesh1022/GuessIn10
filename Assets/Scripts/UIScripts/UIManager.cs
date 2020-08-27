@@ -5,11 +5,13 @@ public class UIManager : MonoBehaviour {
 
     public static UIManager instance;
 
-    public Transform _auth;
+    public Transform _auth, _splash;
     public GameObject _splashPanel, _loginPanel, _registerPanel, _forgotPasswordPanel;
 
     [HideInInspector]
     public Base_UIPanel splashPanel, loginPanel, registerPanel, forgotPasswordPanel;
+
+    public Color register, login;
 
     Base_UIPanel _currentPanel;
 
@@ -22,7 +24,7 @@ public class UIManager : MonoBehaviour {
         }
         else { Destroy(gameObject); }
 
-        splashPanel = Instantiate(_splashPanel, _auth).GetComponent<Base_UIPanel>();
+        splashPanel = Instantiate(_splashPanel, _splash).GetComponent<Base_UIPanel>();
         loginPanel = Instantiate(_loginPanel, _auth).GetComponent<Base_UIPanel>();
         registerPanel = Instantiate(_registerPanel, _auth).GetComponent<Base_UIPanel>();
         forgotPasswordPanel = Instantiate(_forgotPasswordPanel, _auth).GetComponent<Base_UIPanel>();
@@ -44,6 +46,11 @@ public class UIManager : MonoBehaviour {
     private void Update()
     {
         if (_currentPanel) _currentPanel.UpdateBehavior();
+
+        if (AuthController.authController.currentPanel != _currentPanel)
+        {
+            AuthController.authController.currentPanel = _currentPanel.gameObject;
+        }
     }
 
     public void TriggerPanelTransition(Base_UIPanel panel)

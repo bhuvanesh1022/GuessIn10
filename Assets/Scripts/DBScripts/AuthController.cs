@@ -21,6 +21,8 @@ public class AuthController : MonoBehaviour
     FirebaseAuth m_auth;
     public FirebaseUser m_user;
 
+    public GameObject currentPanel;
+
     /*
      * To Make sure AuthController is a single instance   
      * To Make sure WebCLientID for Google was provided
@@ -348,6 +350,7 @@ public class AuthController : MonoBehaviour
 
     private void GetErrorMessage(string errorCode)
     {
+        Debug.Log(errorCode);
         var message = "";
         switch (errorCode)
         {
@@ -362,6 +365,7 @@ public class AuthController : MonoBehaviour
                 break;
             case "WrongPassword":
                 message = "El password es Incorrecto";
+                currentPanel.GetComponent<LoginPanel>().StartCoroutine("IncorrectPassword");
                 break;
             case "EmailAlreadyInUse":
                 message = "Ya existe la cuenta con ese correo electrónico";

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class RegistrationPanel : Base_UIPanel
 {
@@ -12,10 +13,13 @@ public class RegistrationPanel : Base_UIPanel
 
     public Button revealText;
     public Button tNcHl;
-    public Button ppHl;
+    public Button loginBtn;
     public Button registerBtn;
     public Button facebookBtn;
     public Button googleBtn;
+    public Button backBtn;
+
+    public GameObject loginElements;
 
     public TextMeshProUGUI emptyField;
 
@@ -26,6 +30,10 @@ public class RegistrationPanel : Base_UIPanel
     public override void OpenBehavior()
     {
         base.OpenBehavior();
+
+        Camera.main.backgroundColor = UIManager.instance.register;
+
+        emptyField.gameObject.SetActive(false);
 
         userNameIF.onValueChanged.RemoveAllListeners();
         userNameIF.onValueChanged.AddListener(UserNameValue);
@@ -42,8 +50,8 @@ public class RegistrationPanel : Base_UIPanel
         tNcHl.onClick.RemoveAllListeners();
         tNcHl.onClick.AddListener(OnTermsConditions);
 
-        ppHl.onClick.RemoveAllListeners();
-        ppHl.onClick.AddListener(OnPrivacyPolicy);
+        loginBtn.onClick.RemoveAllListeners();
+        loginBtn.onClick.AddListener(OnLoginPressed);
 
         registerBtn.onClick.RemoveAllListeners();
         registerBtn.onClick.AddListener(OnRegisterPressed);
@@ -53,6 +61,9 @@ public class RegistrationPanel : Base_UIPanel
 
         googleBtn.onClick.RemoveAllListeners();
         googleBtn.onClick.AddListener(OnGoogleBtn);
+
+        backBtn.onClick.RemoveAllListeners();
+        backBtn.onClick.AddListener(OnBack);
     }
 
     void UserNameValue(string nm)
@@ -96,20 +107,26 @@ public class RegistrationPanel : Base_UIPanel
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
 
-    void OnPrivacyPolicy()
+    void OnLoginPressed()
     {
-        Base_UIPanel nextPanel = UIManager.instance.forgotPasswordPanel;
+        Base_UIPanel nextPanel = UIManager.instance.loginPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
 
     void OnRegisterPressed()
     {
-        AuthController.authController.RegisterWithEmail(userName, emailId, password);
+        if (emailId != null)
+        {
+            AuthController.authController.RegisterWithEmail(userName, emailId, password);
 
-        Base_UIPanel nextPanel = UIManager.instance.loginPanel;
-        UIManager.instance.TriggerPanelTransition(nextPanel);
+            //Base_UIPanel nextPanel = UIManager.instance.loginPanel;
+            //UIManager.instance.TriggerPanelTransition(nextPanel);
+        }
+        else
+        {
+            StartCoroutine("MissingMail");
+        }
 
-        //Debug.Log(PlayerPrefs.GetString("USERNAME") +"\n"+ PlayerPrefs.GetString("EMAIL") +"\n"+ PlayerPrefs.GetString("PASSWORD"));
     }
 
     void OnFacebookBtn()
@@ -120,5 +137,20 @@ public class RegistrationPanel : Base_UIPanel
     void OnGoogleBtn()
     {
         AuthController.authController.GoogleSignInDelegate();
+    }
+
+    void OnBack()
+    {
+        Base_UIPanel nextPanel = UIManager.instance.splashPanel;
+        UIManager.instance.TriggerPanelTransition(nextPanel);
+    }
+
+    public IEnumerator MissingMail()
+    {
+        loginElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, -100, 0), 0.6f);
+        emptyField.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        emptyField.gameObject.SetActive(false);
+        loginElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, 100, 0), 0.6f);
     }
 }

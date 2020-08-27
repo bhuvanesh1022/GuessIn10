@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class Base_UIPanel : MonoBehaviour {
+public class Base_UIPanel : MonoBehaviour 
+{
     public bool isOpen = false;
 
     public virtual void OpenBehavior()

@@ -9,7 +9,7 @@ public class UserInfo
     [SerializeField]
     string userName;
     [SerializeField]
-    int age;
+    string DOB;
 
     public UserInfo()
     {
@@ -26,16 +26,15 @@ public class UserInfo
         }
     }
 
-    public int Age
+    public string DateOfBirth
     {
         get {
-            return age;
+            return DOB;
         }
         set {
-            age = value;
+            DOB = value;
         }
     }
-
 
     public void SaveObject()
     {

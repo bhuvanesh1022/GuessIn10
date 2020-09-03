@@ -83,7 +83,7 @@ public class AuthController : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         while (m_user == null)
         {
-            Debug.Log("wait");
+          //  Debug.Log("wait");
             yield return new WaitForEndOfFrame();
         }
 

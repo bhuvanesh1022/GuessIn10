@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController controller;
+
     public GameObject currentPackage;
     public Transform holder;
 
@@ -18,13 +21,32 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI oppScore;
     public TextMeshProUGUI endGame;
 
+    public bool gameEnd;
+
     GameObject activePackage;
+
+    private void Awake()
+    {
+        if (GameController.controller == null)
+        {
+            GameController.controller = this;
+        }
+        else
+        {
+            if (GameController.controller != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         activePackage = Instantiate(currentPackage, holder);
+        gameEnd = false;
         InitiateCard();
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
@@ -60,6 +82,7 @@ public class GameController : MonoBehaviour
         else
         {
             endGame.gameObject.SetActive(true);
+            gameEnd = true;
         }
     }
 

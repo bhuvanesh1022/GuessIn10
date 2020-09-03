@@ -134,10 +134,10 @@ public class RegistrationPanel : Base_UIPanel
     {
         if (emailId != null)
         {
-            AuthController.authController.RegisterWithEmail(userName, emailId, password);
+            AuthController.authController.RegisterWithEmail(emailId, password);
 
-            //Base_UIPanel nextPanel = UIManager.instance.loginPanel;
-            //UIManager.instance.TriggerPanelTransition(nextPanel);
+            Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
+            UIManager.instance.TriggerPanelTransition(nextPanel);
         }
         else
         {

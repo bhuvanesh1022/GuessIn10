@@ -19,33 +19,37 @@ public class SwipeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!GameController.controller.gameEnd)
         {
-            this.fingerDown = Input.mousePosition;
-            this.fingerUp = Input.mousePosition;
-            this.fingerDownTime = DateTime.Now;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            this.fingerDown = Input.mousePosition;
-            this.fingerUpTime = DateTime.Now;
-            this.CheckSwipe();
-        }
-        foreach (Touch touch in Input.touches)
-        {
-            if (touch.phase == TouchPhase.Began)
+            if (Input.GetMouseButtonDown(0))
             {
-                this.fingerDown = touch.position;
-                this.fingerUp = touch.position;
+                this.fingerDown = Input.mousePosition;
+                this.fingerUp = Input.mousePosition;
                 this.fingerDownTime = DateTime.Now;
             }
-            if (touch.phase == TouchPhase.Ended)
+            if (Input.GetMouseButtonUp(0))
             {
-                this.fingerDown = touch.position;
+                this.fingerDown = Input.mousePosition;
                 this.fingerUpTime = DateTime.Now;
                 this.CheckSwipe();
             }
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    this.fingerDown = touch.position;
+                    this.fingerUp = touch.position;
+                    this.fingerDownTime = DateTime.Now;
+                }
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    this.fingerDown = touch.position;
+                    this.fingerUpTime = DateTime.Now;
+                    this.CheckSwipe();
+                }
+            }
         }
+
     }
 
     private void CheckSwipe()

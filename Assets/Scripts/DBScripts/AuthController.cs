@@ -87,8 +87,13 @@ public class AuthController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log(string.Format("Welcome {0} \nYour Firebase ID {1}", m_user.DisplayName, m_user.UserId));
-        LoadHome(1);
+        if (!UIManager.instance.profileSetupPanel.gameObject.activeInHierarchy)
+        {
+            Debug.Log(string.Format("Welcome {0} \nYour Firebase ID {1}", m_user.DisplayName, m_user.UserId));
+            LoadHome(1);
+        }
+
+
     }
 
     /*
@@ -138,7 +143,7 @@ public class AuthController : MonoBehaviour
      * Use Email Id and Password to Register a User in Firebase
      */
 
-    public void RegisterWithEmail(string _username, string email, string password)
+    public void RegisterWithEmail(string email, string password)
     {
         m_auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -158,7 +163,11 @@ public class AuthController : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
+                //Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
+                //UIManager.instance.TriggerPanelTransition(nextPanel);
+
                 m_user = task.Result;
+
                 Debug.LogFormat("User signed in successfully: {0} ({1})", m_user.DisplayName, m_user.UserId);
             }
         });

@@ -17,14 +17,14 @@ public class Test : MonoBehaviour
                 userInfo = result;
 
             userNameTxt.text = userInfo.UserName;
-            ageTxt.text = userInfo.Age.ToString();
+            //ageTxt.text = userInfo.Age.ToString();
         });
 	}
 
     public void SaveUserInfo()
     {
         userInfo.UserName = userNameTxt.text;
-        userInfo.Age = System.Convert.ToInt32(ageTxt.text);
+        //userInfo.Age = System.Convert.ToInt32(ageTxt.text);
         userInfo.SaveObject();
     }
 	public void LogoutUser()

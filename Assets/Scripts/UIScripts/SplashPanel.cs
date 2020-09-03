@@ -8,11 +8,11 @@ using DG.Tweening;
 
 public class SplashPanel : Base_UIPanel
 {
-    public Image logo;
     public VideoPlayer splashVideo;
     public VideoClip splashClip;
     public GameObject guess;
     public Image bulb;
+    public Image glow;
     public GameObject AuthForm;
 
     public Button login;
@@ -39,6 +39,16 @@ public class SplashPanel : Base_UIPanel
             StartCoroutine("Splash");
     }
 
+    public override void UpdateBehavior()
+    {
+        base.UpdateBehavior();
+
+        float p = bulb.color.a / bulb.color.b;
+
+        if (p >= .75f) glow.enabled = true;
+        else glow.enabled = false;
+    }
+
     IEnumerator Splash()
     {
         Camera.main.backgroundColor = new Color32(255, 255, 255, 255);
@@ -60,16 +70,24 @@ public class SplashPanel : Base_UIPanel
 
         guess.SetActive(false);
 
-        login.onClick.RemoveAllListeners();
-        login.onClick.AddListener(OnLoginPressed);
-        Debug.Log(login.gameObject.name);
+        if (AuthController.authController.m_user == null)
+        {
+            login.onClick.RemoveAllListeners();
+            login.onClick.AddListener(OnLoginPressed);
+            Debug.Log(login.gameObject.name);
 
-        register.onClick.RemoveAllListeners();
-        register.onClick.AddListener(OnRegisterPressed);
-        Debug.Log(register.gameObject.name);
+            register.onClick.RemoveAllListeners();
+            register.onClick.AddListener(OnRegisterPressed);
+            Debug.Log(register.gameObject.name);
 
-        isOpenedAlready = true;
-        EnableAuthForm();
+            isOpenedAlready = true;
+            EnableAuthForm();
+        }
+        else
+        {
+            Debug.Log("calling");
+            AuthController.authController.LoadHome(1);
+        }
     }
 
     void EnableAuthForm()

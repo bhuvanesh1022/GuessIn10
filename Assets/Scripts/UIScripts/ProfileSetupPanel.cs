@@ -10,15 +10,19 @@ public class ProfileSetupPanel : Base_UIPanel
     public TMP_InputField DOB_IF;
     public TextMeshProUGUI errMsg;
     public Button createProfile;
+    public Color cameraBG;
 
     UserInfo userInfo;
 
     string userNameTxt;
     string ageTxt;
+    string dpId;
 
     public override void OpenBehavior()
     {
         base.OpenBehavior();
+
+        Camera.main.backgroundColor = cameraBG;
 
         userNameIF.onValueChanged.RemoveAllListeners();
         userNameIF.onValueChanged.AddListener(UsernameValue);
@@ -96,5 +100,11 @@ public class ProfileSetupPanel : Base_UIPanel
         //userInfo.DOB = System.Convert.ToInt32(ageTxt);
         userInfo.DateOfBirth = ageTxt;
         userInfo.SaveObject();
+        AuthController.authController.LoadHome(1);
+    }
+
+    void OnDpSelect()
+    {
+
     }
 }

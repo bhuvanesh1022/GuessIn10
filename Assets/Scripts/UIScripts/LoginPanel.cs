@@ -18,6 +18,7 @@ public class LoginPanel : Base_UIPanel
     public Button facebookBtn;
     public Button googleBtn;
     public Button backBtn;
+    public Button closeBtn;
 
     private string emailId;
     private string password;
@@ -64,6 +65,9 @@ public class LoginPanel : Base_UIPanel
 
         backBtn.onClick.RemoveAllListeners();
         backBtn.onClick.AddListener(OnBack);
+
+        closeBtn.onClick.RemoveAllListeners();
+        closeBtn.onClick.AddListener(OncloseBtn);
     }
 
     public override void UpdateBehavior()
@@ -89,15 +93,25 @@ public class LoginPanel : Base_UIPanel
         {
             case TMP_InputField.ContentType.Password:
                 passwordIF.contentType = TMP_InputField.ContentType.Standard;
+                passwordIF.DeactivateInputField();
+                passwordIF.ActivateInputField();
                 break;
 
             case TMP_InputField.ContentType.Standard:
                 passwordIF.contentType = TMP_InputField.ContentType.Password;
+                passwordIF.DeactivateInputField();
+                passwordIF.ActivateInputField();
                 break;
 
             default:
                 break;
         }
+    }
+    void OncloseBtn()
+    {
+        emailIF.Select();
+        emailIF.text = "";
+        closeBtn.gameObject.SetActive(false);
     }
 
     void OnForgotPassword()

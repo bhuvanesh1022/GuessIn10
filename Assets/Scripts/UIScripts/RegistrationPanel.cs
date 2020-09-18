@@ -19,16 +19,20 @@ public class RegistrationPanel : Base_UIPanel
     public Button googleBtn;
     public Button backBtn;
     public Button closeBtn;
+    public Button termsBtn;
 
     public GameObject loginElements;
-    
+    public GameObject termElements;
 
     public TextMeshProUGUI emptyField;
+    public TextMeshProUGUI emptyTerms;
+    public Image tick;
 
     private string userName;
     private string emailId;
     private string password;
     private bool VisiblePassword = false;
+    private bool termsChecked = false;
 
     public override void OpenBehavior()
     {
@@ -38,6 +42,7 @@ public class RegistrationPanel : Base_UIPanel
 
         closeBtn.gameObject.SetActive(false);
         emptyField.gameObject.SetActive(false);
+        emptyTerms.gameObject.SetActive(false);
 
         userNameIF.onValueChanged.RemoveAllListeners();
         userNameIF.onValueChanged.AddListener(UserNameValue);
@@ -70,7 +75,10 @@ public class RegistrationPanel : Base_UIPanel
         backBtn.onClick.AddListener(OnBack);
 
         closeBtn.onClick.RemoveAllListeners();
-        closeBtn.onClick.AddListener(OncloseBtn);
+        closeBtn.onClick.AddListener(OnCloseBtn);
+
+        termsBtn.onClick.RemoveAllListeners();
+        termsBtn.onClick.AddListener(OnCheckedTerms);
     }
 
     void UserNameValue(string nm)
@@ -111,7 +119,8 @@ public class RegistrationPanel : Base_UIPanel
                 break;
         }
     }
-        void OncloseBtn()
+
+    void OnCloseBtn()
     {
         emailIF.Select();
         emailIF.text = "";
@@ -126,6 +135,7 @@ public class RegistrationPanel : Base_UIPanel
 
     void OnLoginPressed()
     {
+        Debug.Log("clickedL");
         Base_UIPanel nextPanel = UIManager.instance.loginPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
@@ -134,10 +144,17 @@ public class RegistrationPanel : Base_UIPanel
     {
         if (emailId != null)
         {
-            AuthController.authController.RegisterWithEmail(emailId, password);
+            if (termsChecked)
+            {
+                AuthController.authController.RegisterWithEmail(emailId, password);
 
-            Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
-            UIManager.instance.TriggerPanelTransition(nextPanel);
+                Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
+                UIManager.instance.TriggerPanelTransition(nextPanel);
+            }
+            else
+            {
+                StartCoroutine("MissingTerms");
+            }
         }
         else
         {
@@ -148,18 +165,39 @@ public class RegistrationPanel : Base_UIPanel
 
     void OnFacebookBtn()
     {
-        AuthController.authController.SignInFacebook();
+        if (termsChecked)
+        {
+            AuthController.authController.SignInFacebook();
+        }
+        else
+        {
+            StartCoroutine("MissingTerms");
+        }
     }
 
     void OnGoogleBtn()
     {
-        AuthController.authController.GoogleSignInDelegate();
+        if (termsChecked)
+        {
+            AuthController.authController.GoogleSignInDelegate();
+        }
+        else
+        {
+            StartCoroutine("MissingTerms");
+        }
     }
 
     void OnBack()
     {
         Base_UIPanel nextPanel = UIManager.instance.splashPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
+    }
+
+    void OnCheckedTerms()
+    {
+        Debug.Log("clicked");
+        termsChecked = true;
+        tick.enabled = true;
     }
 
     public IEnumerator MissingMail()
@@ -169,5 +207,14 @@ public class RegistrationPanel : Base_UIPanel
         yield return new WaitForSeconds(3.0f);  
         emptyField.gameObject.SetActive(false);
         loginElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, 100, 0), 0.6f);
+    }
+
+    public IEnumerator MissingTerms()
+    {
+        termElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, 75, 0), 0.3f);
+        emptyTerms.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        emptyTerms.gameObject.SetActive(false);
+        termElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, -75, 0), 0.3f);
     }
 }

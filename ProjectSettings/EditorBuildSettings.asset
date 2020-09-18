@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Authentication.unity
     guid: d3e1551fbb5b4402e80bd12d3ccb8162
   - enabled: 1
+    path: Assets/Scenes/Guessin10.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Scenes/AnimalsSample.unity
     guid: 6382be8ef553949b0ae0da82cfd4d17c
   - enabled: 1
-    path: Assets/Scenes/LogoutScene.unity
+    path: Assets/Scenes/Logout.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

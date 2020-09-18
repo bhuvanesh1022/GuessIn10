@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         activePackage = Instantiate(currentPackage, holder);
         gameEnd = false;
         InitiateCard();
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene("Logout", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame

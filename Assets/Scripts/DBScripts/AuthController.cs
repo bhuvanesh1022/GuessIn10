@@ -87,7 +87,7 @@ public class AuthController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        if (!UIManager.instance.profileSetupPanel.gameObject.activeInHierarchy)
+        if (!UIManager.instance.profileSetupPanel.gameObject.activeInHierarchy && !UIManager.instance.splashPanel.gameObject.activeInHierarchy)
         {
             Debug.Log(string.Format("Welcome {0} \nYour Firebase ID {1}", m_user.DisplayName, m_user.UserId));
             LoadHome(1);

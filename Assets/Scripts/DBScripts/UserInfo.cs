@@ -10,6 +10,8 @@ public class UserInfo
     string userName;
     [SerializeField]
     string DOB;
+    [SerializeField]
+    int DpId;
 
     public UserInfo()
     {
@@ -33,6 +35,18 @@ public class UserInfo
         }
         set {
             DOB = value;
+        }
+    }
+
+    public int DP_ID
+    {
+        get
+        {
+            return DpId;
+        }
+        set
+        {
+            DpId = value;
         }
     }
 

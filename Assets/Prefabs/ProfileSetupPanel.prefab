@@ -29,15 +29,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2366396807890937778}
   - {fileID: 1419615203390367938}
   - {fileID: 2857039652347117636}
-  - {fileID: 2366396807890937778}
   m_Father: {fileID: 6447454013092394631}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 159.20001}
+  m_AnchoredPosition: {x: 0, y: 159.19922}
   m_SizeDelta: {x: -145.88782, y: -2066.6426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1274977306
@@ -181,7 +181,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1274977304}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.69803923, b: 0.69411767, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1332,6 +1332,21 @@ MonoBehaviour:
   errMsg: {fileID: 6447454011968986456}
   createProfile: {fileID: 6447454013273317497}
   cameraBG: {r: 1, g: 0.7058824, b: 0, a: 1}
+  profilePix:
+  - {fileID: 21300000, guid: 58cb4ec7f73ec474991b6d90cb87dc0a, type: 3}
+  - {fileID: 21300000, guid: 5929c966a948f4ff3a3e6fe25812fba4, type: 3}
+  - {fileID: 21300000, guid: 7d3c020329f224e3089676742a139c2d, type: 3}
+  - {fileID: 21300000, guid: c2b05a7addeb147daa900d1b07bb0ec9, type: 3}
+  - {fileID: 21300000, guid: c425dc2988d2049daaf4b15cb56369d7, type: 3}
+  - {fileID: 21300000, guid: 3dc618c8567764ddc8062d100480728b, type: 3}
+  - {fileID: 21300000, guid: 9d83d204f1e514b18970a528c390c30b, type: 3}
+  - {fileID: 21300000, guid: 13a2973fc30814704845eb3c589269d9, type: 3}
+  dp:
+  - {fileID: 3510054053113253507}
+  - {fileID: 4763516923396246622}
+  - {fileID: 3647590751030523713}
+  swipeThreshold: 50
+  timeThreshold: 0.3
 --- !u!1 &6447454013121464723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00004489943, y: -437}
+  m_AnchoredPosition: {x: 0.00004489943, y: -346}
   m_SizeDelta: {x: 598.23157, y: 97.21265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6447454013273317495
@@ -1684,7 +1699,7 @@ GameObject:
   - component: {fileID: 5045731838504601100}
   - component: {fileID: 3510054053113253507}
   m_Layer: 5
-  m_Name: pic3
+  m_Name: pic0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1702,7 +1717,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1274977304}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1730,7 +1745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8745099, g: 0.427451, b: 0.45098042, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1933,7 +1948,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1274977304}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1961,7 +1976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607844, g: 0.83921576, b: 0.6313726, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

@@ -33,6 +33,7 @@ public class LoginPanel : Base_UIPanel
 
         Camera.main.backgroundColor = UIManager.instance.login;
 
+        closeBtn.gameObject.SetActive(false);
         emptyField.gameObject.SetActive(false);
         incorrectPassword.gameObject.SetActive(false);
 
@@ -67,7 +68,7 @@ public class LoginPanel : Base_UIPanel
         backBtn.onClick.AddListener(OnBack);
 
         closeBtn.onClick.RemoveAllListeners();
-        closeBtn.onClick.AddListener(OncloseBtn);
+        closeBtn.onClick.AddListener(OnCloseBtn);
     }
 
     public override void UpdateBehavior()
@@ -77,6 +78,7 @@ public class LoginPanel : Base_UIPanel
 
     void EmailValue(string eml)
     {
+        closeBtn.gameObject.SetActive(true);
         emailId = eml;
         PlayerPrefs.SetString("EMAIL", emailId);
     }
@@ -107,7 +109,7 @@ public class LoginPanel : Base_UIPanel
                 break;
         }
     }
-    void OncloseBtn()
+    void OnCloseBtn()
     {
         emailIF.Select();
         emailIF.text = "";
@@ -137,6 +139,7 @@ public class LoginPanel : Base_UIPanel
 
     void OnRegisterPressed()
     {
+        Debug.Log("clickedR");
         Base_UIPanel nextPanel = UIManager.instance.registerPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
@@ -153,6 +156,7 @@ public class LoginPanel : Base_UIPanel
 
     void OnBack()
     {
+        Debug.Log("clicked");
         Base_UIPanel nextPanel = UIManager.instance.splashPanel;
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Firebase;
 using Firebase.Database;
@@ -14,6 +15,12 @@ public class DatabaseManager : MonoBehaviour
 {
 
     static DatabaseManager m_instance;
+
+    public string UserName;
+    public string DateOfBirth;
+    public int ProfilePic;
+    public List<Sprite> profilePix = new List<Sprite>();
+    public Image profilePic;
 
     Action<UserInfo> fetchCallback;
     DatabaseReference reference;
@@ -47,7 +54,6 @@ public class DatabaseManager : MonoBehaviour
             return m_instance;
         }
     }
-
 
     public void Fetch(string firebaseUserId, Action<UserInfo> cb)
     {
@@ -106,6 +112,4 @@ public class DatabaseManager : MonoBehaviour
 
         });
     }
-
-
 }

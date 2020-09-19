@@ -6,10 +6,10 @@ public class UIManager : MonoBehaviour {
     public static UIManager instance;
 
     public Transform _auth, _splash;
-    public GameObject _splashPanel, _loginPanel, _registerPanel, _forgotPasswordPanel, _profileSetupPanel;
+    public GameObject _splashPanel, _loginPanel, _registerPanel, _forgotPasswordPanel, _profileSetupPanel, _termsPanel;
 
     [HideInInspector]
-    public Base_UIPanel splashPanel, loginPanel, registerPanel, forgotPasswordPanel, profileSetupPanel;
+    public Base_UIPanel splashPanel, loginPanel, registerPanel, forgotPasswordPanel, profileSetupPanel, termsPanel;
 
     public Color register, login;
 
@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour {
         registerPanel = Instantiate(_registerPanel, _auth).GetComponent<Base_UIPanel>();
         forgotPasswordPanel = Instantiate(_forgotPasswordPanel, _auth).GetComponent<Base_UIPanel>();
         profileSetupPanel = Instantiate(_profileSetupPanel, _auth).GetComponent<Base_UIPanel>();
+        termsPanel = Instantiate(_termsPanel, _auth).GetComponent<Base_UIPanel>();
     }
 
     private void Start()

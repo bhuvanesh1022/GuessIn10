@@ -13,6 +13,8 @@ public class AppManager : MonoBehaviour
         Home.SetActive(true);
         AnimalKingdom.SetActive(false);
         Cities.SetActive(false);
+
+
     }
 
     // Update is called once per frame
@@ -32,6 +34,11 @@ public class AppManager : MonoBehaviour
     {
         Home.SetActive(false);
         AnimalKingdom.SetActive(true);
+    }
+
+    public void ClickToPanel(GameObject panel)
+    {
+        panel.SetActive(true);
     }
 
     public void OnClickCities()

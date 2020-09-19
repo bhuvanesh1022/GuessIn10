@@ -116,6 +116,9 @@ public class ProfileSetupPanel : Base_UIPanel
 
         DatabaseManager.Instance.Fetch(AuthController.authController.m_user.UserId, (result) =>
         {
+            //if (result != null)
+            //userInfo = result;
+
             if (result == null)
                 userInfo = new UserInfo();
             else

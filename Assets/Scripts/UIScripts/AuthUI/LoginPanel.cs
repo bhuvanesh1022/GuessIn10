@@ -126,14 +126,19 @@ public class LoginPanel : Base_UIPanel
     {
         if (emailId != null)
         {
-            AuthController.authController.LoginWithEmail(emailId, password);
+            bool hasAt = emailId.IndexOf('@') > 0;
+            if (hasAt) AuthController.authController.LoginWithEmail(emailId, password, ErrorHandler);
+            else ErrorHandler("InvalidEmail");
+
+            //AuthController.authController.LoginWithEmail(emailId, password, (error) => {emptyField.text = error;});
+
 
             //Base_UIPanel nextPanel = UIManager.instance.loginPanel;
             //UIManager.instance.TriggerPanelTransition(nextPanel);
         }
         else
         {
-            StartCoroutine("MissingMail");
+            ErrorHandler("MissingEmail");
         }
     }
 
@@ -161,15 +166,51 @@ public class LoginPanel : Base_UIPanel
         UIManager.instance.TriggerPanelTransition(nextPanel);
     }
 
-    public IEnumerator MissingMail()
+    public void ErrorHandler(string err)
+    {
+        string message = string.Empty;
+
+        switch (err)
+        {
+            case "AccountExistsWithDifferentCredentials":
+                StartCoroutine(OnErrorMessage("Account already exists, please try another one."));
+                //message = "Ya existe la cuenta con credenciales diferentes";
+                break;
+            case "MissingPassword":
+                StartCoroutine(OnErrorMessage("Password is missing, please enter the password."));
+                //message = "Hace falta el Password";
+                break;
+            case "WrongPassword":
+                StartCoroutine(IncorrectPassword());
+                //message = "El password es Incorrecto";
+                break;
+            case "InvalidEmail":
+                StartCoroutine(OnErrorMessage("Sorry! It doesn't seem like this email id is valid." + "\n" + "Please try another one."));
+                //message = "Correo electronico invalido";
+                break;
+            case "MissingEmail":
+                StartCoroutine(OnErrorMessage("Please enter your parent's email and password to start playing."));
+                //message = "Hace falta el correo electrónico";
+                break;
+            default:
+                message = "Ocurrió un error";
+                StartCoroutine(OnErrorMessage("Please try again."));
+                break;
+        }
+
+        Debug.Log(message);
+    }
+
+    public IEnumerator OnErrorMessage(string errMsg)
     {
         loginElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, -100, 0), 0.6f);
         emptyField.color = Color.red;
+        emptyField.text = errMsg;
         emptyField.gameObject.SetActive(true);
         yield return new WaitForSeconds(3.0f);
         emptyField.gameObject.SetActive(false);
         loginElements.GetComponent<RectTransform>().DOBlendableLocalMoveBy(new Vector3(0, 100, 0), 0.6f);
-   }
+    }
 
    public IEnumerator IncorrectPassword()
    {

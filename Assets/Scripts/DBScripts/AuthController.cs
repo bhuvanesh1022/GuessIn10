@@ -9,6 +9,7 @@ using Firebase.Auth;
 using Facebook.Unity;
 using UnityEngine.SceneManagement;
 using System;
+using Firebase.Extensions;
 
 public class AuthController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class AuthController : MonoBehaviour
     public FirebaseUser m_user;
 
     public GameObject currentPanel;
+
+    UserInfo userInfo;
 
     /*
      * To Make sure AuthController is a single instance   
@@ -71,37 +74,21 @@ public class AuthController : MonoBehaviour
         m_auth = FirebaseAuth.DefaultInstance;
         m_user = FirebaseAuth.DefaultInstance.CurrentUser;
 
-        StartCoroutine(UpdateUI());
-    }
-
-    /*
-     * To Check whether a User have Logged In and to Start A Coroutine to Load Home Page
-     */
-
-    IEnumerator UpdateUI()
-    {
-        yield return new WaitForSeconds(3.0f);
-        while (m_user == null)
-        {
-          //  Debug.Log("wait");
-            yield return new WaitForEndOfFrame();
-        }
-
-        if (!UIManager.instance.profileSetupPanel.gameObject.activeInHierarchy && !UIManager.instance.splashPanel.gameObject.activeInHierarchy)
-        {
-            Debug.Log(string.Format("Welcome {0} \nYour Firebase ID {1}", m_user.DisplayName, m_user.UserId));
-            LoadHome(1);
-        }
-
 
     }
-
-    /*
-     * To Load Home Page
-     */
 
     public void LoadHome(int sceneId)
     {
+        DatabaseManager.Instance.Fetch(AuthController.authController.m_user.UserId, (result) =>
+        {
+            if (result != null)
+                userInfo = result;
+
+            DatabaseManager.Instance.UserName = userInfo.UserName;
+            DatabaseManager.Instance.DateOfBirth = userInfo.DateOfBirth;
+            DatabaseManager.Instance.ProfilePic = userInfo.DP_ID;
+            DatabaseManager.Instance.profilePic.sprite = DatabaseManager.Instance.profilePix[DatabaseManager.Instance.ProfilePic];
+        });
         SceneManager.LoadScene(sceneId);
     }
 
@@ -111,9 +98,9 @@ public class AuthController : MonoBehaviour
      * Use Email Id and Password to Login Firebase
      */
 
-    public void LoginWithEmail(string email, string password)
+    public void LoginWithEmail(string email, string password, System.Action<string> callback)
     {
-        m_auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        m_auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {
@@ -124,13 +111,16 @@ public class AuthController : MonoBehaviour
             {
                 FirebaseException exception = task.Exception.InnerExceptions[0].InnerException as FirebaseException;
                 var errCode = (AuthError)exception.ErrorCode;
-                GetErrorMessage(errCode.ToString());
+                //callback(GetErrorMessage(errCode.ToString()));
+                Debug.Log(errCode.ToString());
+                callback(errCode.ToString());
                 return;
             }
             else if (task.IsCompleted)
             {
                 m_user = task.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", m_user.DisplayName, m_user.UserId);
+                LoadHome(1);
             }
         });
     }
@@ -143,9 +133,9 @@ public class AuthController : MonoBehaviour
      * Use Email Id and Password to Register a User in Firebase
      */
 
-    public void RegisterWithEmail(string email, string password)
+    public void RegisterWithEmail(string email, string password, System.Action<string> callback)
     {
-        m_auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        m_auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {
@@ -157,18 +147,18 @@ public class AuthController : MonoBehaviour
             {
                 FirebaseException exception = task.Exception.InnerExceptions[0].InnerException as FirebaseException;
                 var errCode = (AuthError)exception.ErrorCode;
-                GetErrorMessage(errCode.ToString());
+                Debug.Log(errCode.ToString());
+                callback(errCode.ToString());
                 //Debug.LogError("SignInWithEmailAndPassword encountered an error: " + task.Exception);
                 return;
             }
             else if (task.IsCompleted)
             {
-                //Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
-                //UIManager.instance.TriggerPanelTransition(nextPanel);
-
                 m_user = task.Result;
-
                 Debug.LogFormat("User signed in successfully: {0} ({1})", m_user.DisplayName, m_user.UserId);
+
+                Base_UIPanel nextPanel = UIManager.instance.profileSetupPanel;
+                UIManager.instance.TriggerPanelTransition(nextPanel);
             }
         });
     }
@@ -179,7 +169,7 @@ public class AuthController : MonoBehaviour
     {
         Debug.Log("sent");
 
-        m_auth.SendPasswordResetEmailAsync(email).ContinueWith(task => {
+        m_auth.SendPasswordResetEmailAsync(email).ContinueWithOnMainThread(task => {
             if (task.IsCanceled)
             {
                 Debug.LogError("SendPasswordResetEmailAsync was canceled.");
@@ -254,7 +244,7 @@ public class AuthController : MonoBehaviour
     private void SignInFirebase(AccessToken accessToken)
     {
         var credential = FacebookAuthProvider.GetCredential(accessToken.TokenString);
-        m_auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
+        m_auth.SignInWithCredentialAsync(credential).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {
@@ -269,6 +259,7 @@ public class AuthController : MonoBehaviour
 
             m_user = task.Result;
             Debug.Log($"User signed in: {m_user.DisplayName}, {m_user.UserId}.");
+            LoadHome(1);
         });
     }
 
@@ -287,7 +278,7 @@ public class AuthController : MonoBehaviour
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
 
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(
+        GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(
           OnAuthenticationFinished);
     }
 
@@ -329,7 +320,7 @@ public class AuthController : MonoBehaviour
 
 
             Credential credential = GoogleAuthProvider.GetCredential(task.Result.IdToken, null);
-            m_auth.SignInWithCredentialAsync(credential).ContinueWith(t => {
+            m_auth.SignInWithCredentialAsync(credential).ContinueWithOnMainThread(t => {
                 if (t.IsCanceled)
                 {
                     if (Debug.isDebugBuild)
@@ -345,6 +336,7 @@ public class AuthController : MonoBehaviour
 
                 m_user = t.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", m_user.DisplayName, m_user.UserId);
+                LoadHome(1);
             });
         }
     }
@@ -357,9 +349,8 @@ public class AuthController : MonoBehaviour
      * This Method calls when Login Faulted with Firebase
      */
 
-    private void GetErrorMessage(string errorCode)
+    private string GetErrorMessage(string errorCode)
     {
-        Debug.Log(errorCode);
         var message = "";
         switch (errorCode)
         {
@@ -374,7 +365,6 @@ public class AuthController : MonoBehaviour
                 break;
             case "WrongPassword":
                 message = "El password es Incorrecto";
-                currentPanel.GetComponent<LoginPanel>().StartCoroutine("IncorrectPassword");
                 break;
             case "EmailAlreadyInUse":
                 message = "Ya existe la cuenta con ese correo electrónico";
@@ -389,7 +379,7 @@ public class AuthController : MonoBehaviour
                 message = "Ocurrió un error";
                 break;
         }
-        Debug.Log(message);
+        return message;
     }
 
     #endregion

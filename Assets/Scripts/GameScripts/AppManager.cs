@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class AppManager : MonoBehaviour
 {
     public GameObject Home, AnimalKingdom, Cities;
-
+    public GameObject[] _selectUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,35 +17,33 @@ public class AppManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClosseButtonClicked()
     {
         Home.SetActive(true);
         AnimalKingdom.SetActive(false);
         Cities.SetActive(false);
     }
-
-    public void OnClickAnimalKingdom()
+    //public void OnClickAnimalKingdom()
+    //{
+    //    Home.SetActive(false);
+    //    AnimalKingdom.SetActive(true);
+    //}
+    //public void OnClickCities()
+    //{
+    //    Home.SetActive(false);
+    //    Cities.SetActive(true);
+    //}
+    public void ShowToPanelUI(int n)
     {
         Home.SetActive(false);
-        AnimalKingdom.SetActive(true);
+        _selectUI[n].SetActive(true);
     }
-
-    public void ClickToPanel(GameObject panel)
+        public void ClickToPanel(GameObject panel)
     {
         panel.SetActive(true);
     }
 
-    public void OnClickCities()
-    {
-        Home.SetActive(false);
-        Cities.SetActive(true);
-    }
+   
 
     public void OnClickBuy()
     {

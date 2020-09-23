@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class AppManager : MonoBehaviour
 {
     public GameObject Home, AnimalKingdom, Cities;
@@ -11,6 +11,8 @@ public class AppManager : MonoBehaviour
     public GameObject Player1, Player2,Dummyplayer1, Dummyplayer2;
     [SerializeField] GameObject[] Player_Txt;
     [SerializeField] Button[] btnfield;
+    [SerializeField] TextMeshProUGUI Displayer_1TXT, Displayer_2TXT;
+    public string Strplayer1, Strplayer2; 
     int cnt = 0;
     // Start is called before the first frame update
     void Start()
@@ -26,16 +28,7 @@ public class AppManager : MonoBehaviour
         AnimalKingdom.SetActive(false);
         Cities.SetActive(false);
     }
-    //public void OnClickAnimalKingdom()
-    //{
-    //    Home.SetActive(false);
-    //    AnimalKingdom.SetActive(true);
-    //}
-    //public void OnClickCities()
-    //{
-    //    Home.SetActive(false);
-    //    Cities.SetActive(true);
-    //}
+    
     public void ShowToPanelUI(int n)
     {
         Home.SetActive(false);

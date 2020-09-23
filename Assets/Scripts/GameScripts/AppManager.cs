@@ -17,6 +17,8 @@ public class AppManager : MonoBehaviour
     int cnt = 0;
     // common script
     [SerializeField] TextMeshProUGUI Gamepage_player1,Gamepage_player2;
+    // player ready screen
+    public TextMeshProUGUI ReadyPlayer1, ReadyPlayer2;
 
     void Awake()
     {
@@ -43,6 +45,9 @@ public class AppManager : MonoBehaviour
         Gamepage_player1.text = Strplayer1;
         Gamepage_player2.text = Strplayer2;
         print("Gamepage_player1"+ Gamepage_player1.text);
+        ReadyPlayer1.text = Strplayer1+ " holds the device";
+        ReadyPlayer2.text = "It's "+Strplayer2 + " turn to guess ";
+
     }
     public void OnClosseButtonClicked()
     {

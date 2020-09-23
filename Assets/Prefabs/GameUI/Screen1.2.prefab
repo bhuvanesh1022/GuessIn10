@@ -422,9 +422,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ed2b0855d275646ceae07c9fa37fe013, type: 2}
-  m_sharedMaterial: {fileID: -8335943371470209949, guid: ed2b0855d275646ceae07c9fa37fe013,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -950,9 +949,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Free sample cards '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2d59c77478bcd42db9ae2dbee88a7ff6, type: 2}
-  m_sharedMaterial: {fileID: -2379553958192162860, guid: 2d59c77478bcd42db9ae2dbee88a7ff6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1109,9 +1107,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ed2b0855d275646ceae07c9fa37fe013, type: 2}
-  m_sharedMaterial: {fileID: -8335943371470209949, guid: ed2b0855d275646ceae07c9fa37fe013,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1182,7 +1179,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1470,9 +1467,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: INR 500.00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2d59c77478bcd42db9ae2dbee88a7ff6, type: 2}
-  m_sharedMaterial: {fileID: -2379553958192162860, guid: 2d59c77478bcd42db9ae2dbee88a7ff6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1629,9 +1625,8 @@ MonoBehaviour:
 
     THE WORLD'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ed2b0855d275646ceae07c9fa37fe013, type: 2}
-  m_sharedMaterial: {fileID: -8335943371470209949, guid: ed2b0855d275646ceae07c9fa37fe013,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2015,9 +2010,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ed2b0855d275646ceae07c9fa37fe013, type: 2}
-  m_sharedMaterial: {fileID: -8335943371470209949, guid: ed2b0855d275646ceae07c9fa37fe013,
-    type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2322,9 +2316,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ed2b0855d275646ceae07c9fa37fe013, type: 2}
-  m_sharedMaterial: {fileID: -8335943371470209949, guid: ed2b0855d275646ceae07c9fa37fe013,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2395,7 +2388,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

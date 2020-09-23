@@ -1127,7 +1127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66a44c413b974856894abf598296b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appmanager: {fileID: 0}
   currentPackage: {fileID: 5345140182905777529, guid: 9fe7a482c393648a6a53627809d8c2ef,
     type: 3}
   holder: {fileID: 1620981874}

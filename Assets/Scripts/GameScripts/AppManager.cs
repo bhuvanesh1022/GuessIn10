@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public class AppManager : MonoBehaviour
 {
+   public AppManager instance;
     public GameObject Home, AnimalKingdom, Cities;
     public GameObject[] _selectUI,Player1Pos, Player2Pos;
     public GameObject Player1, Player2,Dummyplayer1, Dummyplayer2;
@@ -14,14 +15,35 @@ public class AppManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI Displayer_1TXT, Displayer_2TXT;
     public string Strplayer1, Strplayer2; 
     int cnt = 0;
-    // Start is called before the first frame update
+    // common script
+    [SerializeField] TextMeshProUGUI Gamepage_player1,Gamepage_player2;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
     void Start()
     {
         Home.SetActive(true);
         AnimalKingdom.SetActive(false);
         Cities.SetActive(false);
     }
-
+    private void Update()
+    {
+        Strplayer1 = Displayer_1TXT.text;
+        Strplayer2 = Displayer_2TXT.text;
+        Gamepage_player1.text = Strplayer1;
+        Gamepage_player2.text = Strplayer2;
+        print("Gamepage_player1"+ Gamepage_player1.text);
+    }
     public void OnClosseButtonClicked()
     {
         Home.SetActive(true);

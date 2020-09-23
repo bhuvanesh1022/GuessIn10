@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController controller;
-
+    AppManager appmanager;
     public GameObject currentPackage;
     public Transform holder;
 
@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     public bool gameEnd;
 
     GameObject activePackage;
+    //
+    public TextMeshProUGUI Player1, Player2;
 
     private void Awake()
     {
@@ -38,11 +40,16 @@ public class GameController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        appmanager = FindObjectOfType<AppManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        Player1.text = appmanager.Strplayer1;
+        Player2.text = appmanager.Strplayer2;
+
         activePackage = Instantiate(currentPackage, holder);
         gameEnd = false;
         InitiateCard();

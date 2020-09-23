@@ -1127,6 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66a44c413b974856894abf598296b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appmanager: {fileID: 0}
   currentPackage: {fileID: 5345140182905777529, guid: 9fe7a482c393648a6a53627809d8c2ef,
     type: 3}
   holder: {fileID: 1620981874}
@@ -1139,6 +1140,8 @@ MonoBehaviour:
   oppScore: {fileID: 285278551}
   endGame: {fileID: 1249944807}
   gameEnd: 0
+  Player1: {fileID: 1931475640}
+  Player2: {fileID: 1649743460}
 --- !u!1 &1931475638
 GameObject:
   m_ObjectHideFlags: 0

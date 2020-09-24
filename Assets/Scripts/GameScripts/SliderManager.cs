@@ -20,9 +20,9 @@ public class SliderManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _sliderTxt[0].text = QuesSlider.value.ToString();
-        _sliderTxt[1].text = GuessSlider.value.ToString();
-        _sliderTxt[2].text = ClueSlider.value.ToString();
+        _sliderTxt[0].text = "Questions: " + QuesSlider.value.ToString();
+        _sliderTxt[1].text = "Guesses: " + GuessSlider.value.ToString();
+        _sliderTxt[2].text = "Clues: " + ClueSlider.value.ToString();
 
     }
 }
